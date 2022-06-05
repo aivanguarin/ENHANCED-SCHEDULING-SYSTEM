@@ -2,9 +2,10 @@
     justify-content: center;
     text-align: center;
     height: 20vh;
-    border: 2px solid gray;
+    border: 1px solid  #1A374D;;
     text-align: center;
     margin-top: 20px;
+    background-color: #1A374D;
 }
 
 .top h2{
@@ -22,9 +23,8 @@
 }
 
 .bottom{
-    margin-top: 20px;
-    border: 2px solid gray;
-    height: 50vh;
+    margin-top: 15px;
+    height: 60vh;
 }
 
 .bottom{
@@ -33,20 +33,52 @@
 }
 .bottom .left{
     margin-top: 2px;
-    margin-left: 2px;
     margin-right: 20x;
     margin-bottom: 2px;
-    border: 1px solid green;
     height: 100%;
     width: 33.33%;
+    background-color: #152028;
+}
+
+.content{
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    font-size: 18px;
+    font-family: 'Nuosu SIL', serif;
+    text-align: center;
+}
+
+.bottom .right .content{
+    color: white;
+    padding-top: 10px;
+    font-size: 12px;
+    text-align: left;
+    font-family: 'Nuosu SIL', serif;
 }
 
 .bottom .center{
     margin-top: 2px;
-    margin-left: 2px;
     margin-right: 20x;
     margin-bottom: 2px;
-    border: 1px solid red;
     height: 100%;
     width: 33.33%;
+    background-color: #1A374D;
+}
+
+.bottom .right{
+    margin-top: 2px;
+    margin-right: 20x;
+    margin-bottom: 2px;
+    height: 100%;
+    width: 33.33%;
+    background-color: #152028;
+}
+
+.content-header{
+    color: white;
+    padding-top: 15px;
+    padding-left: 20px;
+    font-size: 20px;
 }
