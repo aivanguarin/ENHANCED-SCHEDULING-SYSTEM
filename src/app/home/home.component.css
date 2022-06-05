@@ -1,0 +1,52 @@
+.top{
+    justify-content: center;
+    text-align: center;
+    height: 20vh;
+    border: 2px solid gray;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.top h2{
+    margin-top: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    color: white;
+}
+
+.top p{
+    font-family:'Dosis', sans-serif;
+    margin-top: 20px;
+    font-size: 25px;
+    color: rgb(71, 187, 253);
+}
+
+.bottom{
+    margin-top: 20px;
+    border: 2px solid gray;
+    height: 50vh;
+}
+
+.bottom{
+    display: flex;
+    align-items: flex-end;
+}
+.bottom .left{
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: 20x;
+    margin-bottom: 2px;
+    border: 1px solid green;
+    height: 100%;
+    width: 33.33%;
+}
+
+.bottom .center{
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: 20x;
+    margin-bottom: 2px;
+    border: 1px solid red;
+    height: 100%;
+    width: 33.33%;
+}

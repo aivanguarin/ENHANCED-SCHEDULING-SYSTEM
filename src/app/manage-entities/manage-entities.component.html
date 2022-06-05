@@ -1,0 +1,1160 @@
+<mat-tab-group class="mat-elevation-z1">
+  
+  <!-- ========================== SEMESTER ================================= -->
+
+  <mat-tab label="Semesters" value="Semesters">
+    <app-tab-template>
+      <div side-title>
+        Semesters
+      </div>
+      <div side-content>
+        <div>
+          <mat-form-field appearance="standard" class="searchbar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+          
+        </div>
+        <button mat-button (click)="showNewSemesterPopup=true" class="gray-button">New Semester</button>
+      </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="semesterData" *ngIf="semesterTableReady" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="school_year">
+            <th mat-header-cell *matHeaderCellDef> SCH0OL YEAR </th>
+            <td mat-cell *matCellDef="let element"> {{element.school_year}}</td> 
+            
+          </ng-container>
+      
+          <ng-container matColumnDef="sem">
+            <th mat-header-cell *matHeaderCellDef> SEMESTER </th>
+            <td mat-cell *matCellDef="let element"> {{element.sem}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="campus_director">
+            <th mat-header-cell *matHeaderCellDef> CAMPUS DIRECTOR </th>
+            <td mat-cell *matCellDef="let element"> {{element.campus_director}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef> ACTIVE </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="check-icon">check_circle</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="default">
+            <th mat-header-cell *matHeaderCellDef> DEFAULT </th>
+            <!-- <td mat-cell *matCellDef="let element">
+              <div *ngIf = "element.default === 1">Default</div>
+            </td>  -->
+            <td mat-cell *matCellDef=""></td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+            
+              <td mat-cell *matCellDef="let element"  class="actn">
+                <button mat-icon-button color="primary" (click)="editSemester(element)" title="Edit"><mat-icon>edit</mat-icon></button> 
+                <button mat-icon-button color="primary" (click)="deleteSemesterProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button> 
+              </td>
+            
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="semesterRowDef" class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: semesterRowDef" class = "table-row"></tr>
+          
+         
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
+
+  
+  <!-- =========================== COLLEGES ================================== -->
+  
+  <mat-tab label="Colleges" value="Colleges">
+    <app-tab-template>
+      <div side-title>
+        Colleges
+      </div>
+      <div side-content>
+        <div>
+          <mat-form-field appearance="standard" class="searchbar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+          
+        </div>
+        <button mat-button (click)="showNewCollegePopup=true" class="gray-button">New College</button>
+      </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="collegeData" *ngIf="collegeTableReady" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <!-- <td mat-cell *matCellDef="let element"> {{element.id}} </td>  -->
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> COLLEGE CODE </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}}</td> 
+            
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> NAME </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef > ACTIVE </th>
+            <td mat-cell *matCellDef="let element"> <mat-icon class="check-icon">check_circle</mat-icon> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+            
+              <td mat-cell *matCellDef="let element"  class="actn">
+              <button mat-icon-button color="primary" (click)="editCollege(element)" title="Edit"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="deleteCollegeProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button> 
+            
+              </td>
+          
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="collegeRowDef"  class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: collegeRowDef" class = "table-row"></tr>
+          
+  
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
+
+  
+  
+  <!-- ============================== COURSES ==================================== -->
+  
+  <mat-tab label="Course" value="Courses">
+    <app-tab-template>
+      <div side-title>
+        Courses
+      </div>
+      <div side-content>
+        <div>
+          <mat-form-field appearance="standard" class="searchbar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+          
+        </div>
+        <button mat-button (click)="showNewCoursePopup=true" class="gray-button">New Course</button>
+      </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="courseData" *ngIf="courseTableReady" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> COURSE CODE </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}}</td> 
+            
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> NAME</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef > ACTIVE </th>
+            <td mat-cell *matCellDef="let element"> <mat-icon class="check-icon">check_circle</mat-icon> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+            
+              <td mat-cell *matCellDef="let element" class="actn">
+              <button mat-icon-button color="primary" (click)="editCourse(element)" title="Edit"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="deleteCourseProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button> 
+            
+              </td>
+            
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="coursesRowDef" class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: coursesRowDef" class = "table-row"></tr>
+     
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
+
+  
+
+  <!-- ============================== SUBJECTS ===================================== -->
+  
+  <mat-tab label="Subjects" value="Subjects">
+    <app-tab-template>
+      <div side-title>
+        Subjects
+      </div>
+      <div side-content>
+        <div>
+          <mat-form-field appearance="standard" class="searchbar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+          
+        </div>
+        <button mat-button (click)="showNewSubjectPopup=true" class="gray-button">New Subject</button>
+      </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="subjectsData" *ngIf="subjectTableReady" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <!-- <td mat-cell *matCellDef="let element"> {{element.id}} </td>  -->
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> SUBJECT CODE </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}}</td> 
+            
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lec_units">
+            <th mat-header-cell *matHeaderCellDef>LEC </th>
+            <td mat-cell *matCellDef="let element"> {{element.lec_units}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lab_units">
+            <th mat-header-cell *matHeaderCellDef> LAB </th>
+            <td mat-cell *matCellDef="let element"> {{element.lab_units}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef class="active"> ACTIVE </th>
+            <td mat-cell *matCellDef="let element"><mat-icon class="check-icon">check_circle</mat-icon> </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="subjectsRowDef" class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: subjectsRowDef" class = "table-row"></tr>
+          
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+            
+              <td mat-cell *matCellDef="let element" class="actn" >
+              <button mat-icon-button color="primary" (click)="editSubject(element)" title="Edit"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="deleteSubjectProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button> 
+            
+              </td>
+            
+          </ng-container>
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
+
+  
+
+  <!-- ================================ ROOMS =================================== -->
+  
+  <mat-tab label="Rooms" value="Rooms">
+    <app-tab-template>
+      <div side-title>
+        Rooms
+      </div>
+      <div side-content>
+        <div>
+          <mat-form-field appearance="standard" class="searchbar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+          
+        </div>
+        <button mat-button (click)="showNewRoomPopup=true" class="gray-button">New Room</button>
+      </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="roomsData" *ngIf="roomTableReady" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <!-- <td mat-cell *matCellDef="let element"> {{element.id}} </td>  -->
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> ROOM CODE </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}}</td> 
+            
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+    
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef class="active"> ACTIVE </th>
+            <td mat-cell *matCellDef="let element"> <mat-icon class="check-icon">check_circle</mat-icon> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+              <td mat-cell *matCellDef="let element"  class="actn" >
+              <button mat-icon-button color="primary" (click)="editRoom(element)" title="Edit"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="deleteRoomProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button> 
+            
+              </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="roomsRowDef" class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: roomsRowDef" class = "table-row"></tr>
+          
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
+
+  
+  <!-- ================================ INSTRUCTORS ===================================== -->
+  
+      <mat-tab label="Instructors" value="Employees">
+        <app-tab-template>
+          <div side-title>
+            Instructors
+          </div>
+          <div side-content>
+            <div>
+              <mat-form-field appearance="standard" class="searchbar">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+              </mat-form-field>
+              
+            </div>
+            <button mat-button (click)="showNewUserPopup=true" class="gray-button">New</button>
+          </div>
+          <div main-title>
+            Results
+          </div>
+          <div main-content>
+            <table mat-table [dataSource]="instructorsData" *ngIf="usersTableReady" class="mat-elevation-z1">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> # </th>
+               <!-- <td mat-cell *matCellDef="let element"> {{element.id}} </td>  -->
+               <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+              </ng-container>
+            
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> NAME </th>
+                <td mat-cell *matCellDef="let element"> {{(element.last_name + "," + " " + element.first_name)}}</td> 
+                
+              </ng-container>
+            
+              <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> USERNAME </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef> ROLE </th>
+               <!-- <td mat-cell *matCellDef="let element"> {{element.is_active}} </td> -->
+               <td mat-cell *matCellDef="let element">ADMIN</td>
+              </ng-container>
+            
+
+              <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef class="active"> ACTIVE </th>
+               <td mat-cell *matCellDef="let element"><mat-icon class="check-icon">check_circle</mat-icon></td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+                
+                  <td mat-cell *matCellDef="let element" class="actn" >
+                  <button mat-icon-button color="primary" (click)="showEditUserPopup=true" title="Edit"><mat-icon>edit</mat-icon></button>
+                  <button mat-icon-button color="primary" (click)="deleteInstructorsProcess(element.username)" title="Delete"><mat-icon>delete</mat-icon></button>
+                  </td>
+                
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="instructorsRowDef" class="table-header"></tr>
+              <tr mat-row *matRowDef="let row; columns:instructorsRowDef" class = "table-row"></tr>
+
+            </table>    
+          </div>
+        </app-tab-template>
+      </mat-tab>
+
+  <!-- =================================== USERS ===================================== -->
+  
+    <mat-tab label="Users" value="Users">
+      <app-tab-template>
+        <div side-title>
+          Users
+        </div>
+        <div side-content>
+          <div>
+            <mat-form-field appearance="standard" class="searchbar">
+              <mat-label>Search</mat-label>
+              <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+            
+          </div>
+          <button mat-button (click)="showNewUserPopup=true" class="gray-button">New</button>
+        </div>
+        <div main-title>
+          Results
+        </div>
+        <div main-content>
+          <table mat-table [dataSource]="usersData" *ngIf="usersTableReady" class="mat-elevation-z1">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+             <!-- <td mat-cell *matCellDef="let element"> {{element.id}} </td>  -->
+             <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> NAME </th>
+              <td mat-cell *matCellDef="let element"> {{instructorNameUtil(element.username)}}</td> 
+              
+            </ng-container>
+          
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef> USERNAME </th>
+              <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="active">
+              <th mat-header-cell *matHeaderCellDef class="active"> ACTIVE </th>
+              <td mat-cell *matCellDef="let element"> <mat-icon class="check-icon">check_circle</mat-icon> </td>
+            </ng-container>
+
+           <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+                <td mat-cell *matCellDef="let element"  class="actn" >
+                <button mat-icon-button color="primary" (click)="editUser(element)" title="Edit"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button color="primary" (click)="deleteUserProcess(element.id)" title="Delete"><mat-icon>delete</mat-icon></button>
+                </td>
+            </ng-container>
+           
+            
+            <tr mat-header-row *matHeaderRowDef="usersRowDef" class="table-header"></tr>
+            <tr mat-row *matRowDef="let row; columns:usersRowDef" class = "table-row"></tr> -->
+
+          </table> 
+        </div>
+      </app-tab-template>
+    </mat-tab>
+  </mat-tab-group>
+<!--==================================== END OF USER =========================================-->
+
+<!--==================================== NEW SUBJECT POPUP ====================================-->
+<div *ngIf="showNewSubjectPopup" class="popup-wrapper">
+  <div (click)="showNewSubjectPopup=!showNewSubjectPopup" class="popup-backdrop">
+  </div>
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        New Subject
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newSubjectForm" (ngSubmit)="newSubjectProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="10" placeholder="Subject Code" formControlName="code">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="80" placeholder="Description" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="1" placeholder="Lec Units" formControlName="lec_units">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="1" placeholder="Lab Units" formControlName="lab_units">
+            </mat-form-field>
+          </div>
+          
+        </div>
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+  </mat-card>
+</div>
+
+<!---=================================END OF NEW SUBJECT POPUP ==============================-->
+
+<!--================================== NEW ROOM POPUP =======================================-->
+<div *ngIf="showNewRoomPopup" class="popup-wrapper">
+  <div (click)="showNewRoomPopup=!showNewRoomPopup" class="popup-backdrop">
+  </div>
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        New Room
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newRoomForm" (ngSubmit)="newRoomProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="10" placeholder="Room Code" formControlName="code">
+            </mat-form-field>
+          </div>
+         
+        </div>
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="80" placeholder="Description" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+  </mat-card>
+</div>
+
+<!--==================================== END OF NEW ROOM POPUP ==============================-->
+
+<!--===================================== NEW COURSE POPUP ==================================-->
+<div *ngIf="showNewCoursePopup" class="popup-wrapper">
+  <div (click)="showNewCoursePopup=!showNewCoursePopup" class="popup-backdrop">
+  </div>
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        New Course
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newCourseForm" (ngSubmit)="newCourseProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="9" placeholder="Course Code" formControlName="code">
+            </mat-form-field>
+          </div>
+        </div>
+          <div fxLayoutAlign="stretch" fxLayout="row">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput maxlength="100" placeholder="Description" formControlName="name">
+              </mat-form-field>
+            </div>
+            
+          </div>
+        
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+  </mat-card>
+</div>
+
+  <!-- ============================== NEW SEMESTER POPUP ================================ -->
+
+  <div *ngIf="showNewSemesterPopup" class="popup-wrapper">
+    <div (click)="showNewSemesterPopup=!showNewSemesterPopup" class="popup-backdrop">
+    </div>
+      <mat-card class="popup">
+        <mat-toolbar color="'primary'">
+          New Semester
+        </mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newSemesterForm" (ngSubmit)="newSemesterProcess()">
+          <div fxLayoutAlign="stretch" fxLayout="row">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput maxlength="9" placeholder="School Year" formControlName="school_year">
+              </mat-form-field>
+            </div>
+            <div fxLayout="column">
+              <mat-form-field>
+                <mat-label>Semester</mat-label>
+                  <mat-select formControlName="sem">
+                    <mat-option [value]=1>1</mat-option>
+                    <mat-option [value]=2>2</mat-option>
+                    <mat-option [value]=3>Summer</mat-option>
+                  </mat-select>
+              </mat-form-field> 
+            </div>
+          </div>
+          <div fxLayoutAlign="stretch" fxLayout="row">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput maxlength="30" placeholder="Campus Director" formControlName="campus_director">
+              </mat-form-field>
+            </div>
+            
+          </div>
+          <div fxLayout ="column">
+            <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+          </div>
+          <br>
+          <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </mat-card>
+  </div>
+<!--========================== END OF NEW SEMESTER POPUP===========================-->
+
+ <!--=========================== NEW COLLEGE POPUP ===================================-->
+ <div *ngIf="showNewCollegePopup" class="popup-wrapper">
+  <div (click)="showNewCollegePopup=!showNewCollegePopup" class="popup-backdrop">
+  </div>
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        New College
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newCollegeForm" (ngSubmit)="newCollegeProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="9" placeholder="College Code" formControlName="code">
+            </mat-form-field>
+          </div>
+        </div>
+          
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="60" placeholder="College Name" formControlName="name">
+            </mat-form-field>
+          </div> 
+        </div>
+        
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+  </mat-card>
+</div>
+<!--================================ END OF NEW COLLEGE POPUP ====================================-->
+
+  <!--============================= NEW USER POPUP ==================================-->
+
+  <div *ngIf="showNewUserPopup" class="popup-wrapper">
+    <div (click)="showNewUserPopup=!showNewUserPopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        New User
+      </mat-toolbar>
+      
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="newUserForm" (ngSubmit)="newUserProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Last Name" formControlName="last_name">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="First Name" formControlName="first_name">
+            </mat-form-field>
+          </div>
+         
+        </div>
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Middle Name" formControlName="middle_name">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="5" placeholder="Name Suffix" formControlName="suffix_name">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Salutation</mat-label>
+                <mat-select formControlName="salutation">
+                  <mat-option [value]="'mr'">Mr.</mat-option>
+                  <mat-option [value]="'ms'">Ms.</mat-option>
+                </mat-select>
+              
+            </mat-form-field>
+          </div>
+          
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Sex</mat-label>
+                <mat-select formControlName="sex">
+                  <mat-option [value]="'m'">Male</mat-option>
+                  <mat-option [value]="'f'">Female</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>College</mat-label>
+                <mat-select formControlName="college_id">
+                  <mat-option [value]=1>CEA</mat-option>
+                  <mat-option [value]=0>Others</mat-option>
+                </mat-select>
+            </mat-form-field>  
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Course</mat-label>
+                <mat-select formControlName="course_id">
+                  <mat-option [value]=1>BSCpE</mat-option>
+                  <mat-option [value]=0>Others</mat-option>
+                </mat-select>
+            </mat-form-field> 
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="8" placeholder="Max Load" formControlName="max_load">
+            </mat-form-field>
+          </div>
+          <!--
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Admin Function" formControlName="admin_function">
+            </mat-form-field>
+          </div>  -->
+
+          <!--FOR CHECKBOX RETURNS BOOLEAN  -->
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Admin Function</mat-label>
+                <mat-select formControlName="admin_function">
+                  <mat-option [value]=1>Has admin function</mat-option>
+                  <mat-option [value]=0>None</mat-option>
+                </mat-select>
+            </mat-form-field>  
+          </div>
+            
+        </div>
+        <div fxLayout ="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput type="number" maxlength="8" placeholder="Admin Hours" formControlName="admin_hrs">
+            </mat-form-field>
+          </div>
+          <div fxLayout ="column">
+            <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Username" formControlName="username">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
+        </div>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!-- ==============================END OF NEW USER POPUP================================= -->
+
+  <!--=============================== EDIT USER POPUP ======================================-->
+
+  <div *ngIf="showEditUserPopup" class="popup-wrapper">
+    <div (click)="showEditUserPopup=!showEditUserPopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit User
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editUserForm" (ngSubmit)="editUserProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Last Name" formControlName="last_name">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="First Name" formControlName="first_name">
+            </mat-form-field>
+          </div>
+         
+        </div>
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Middle Name" formControlName="middle_name">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="5" placeholder="Name Suffix" formControlName="suffix_name">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Salutation</mat-label>
+                <mat-select formControlName="salutation">
+                  <mat-option [value]="'mr'">Mr.</mat-option>
+                  <mat-option [value]="'ms'">Ms.</mat-option>
+                </mat-select>
+              
+            </mat-form-field>
+          </div>
+          
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Sex</mat-label>
+                <mat-select formControlName="sex">
+                  <mat-option [value]="'m'">Male</mat-option>
+                  <mat-option [value]="'f'">Female</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>College</mat-label>
+                <mat-select formControlName="college_id">
+                  <mat-option [value]=1>CEA</mat-option>
+                  <mat-option [value]=0>Others</mat-option>
+                </mat-select>
+            </mat-form-field>  
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Course</mat-label>
+                <mat-select formControlName="course_id">
+                  <mat-option [value]=1>BSCpE</mat-option>
+                  <mat-option [value]=0>Others</mat-option>
+                </mat-select>
+            </mat-form-field> 
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="8" placeholder="Max Load" formControlName="max_load">
+            </mat-form-field>
+          </div>
+         
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Admin Function</mat-label>
+                <mat-select formControlName="admin_function">
+                  <mat-option [value]=1>Has admin function</mat-option>
+                  <mat-option [value]=0>None</mat-option>
+                </mat-select>
+            </mat-form-field>  
+          </div>
+            
+        </div>
+        <div fxLayout ="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput type="number" maxlength="8" placeholder="Admin Hours" formControlName="admin_hrs">
+            </mat-form-field>
+          </div>
+          <div fxLayout ="column">
+            <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="20" placeholder="Username" formControlName="username">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
+        </div>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+      
+    </mat-card>
+  </div>
+
+  <!--============================== END OF EDIT USER POPUP =================================-->
+
+  <!--============================== EDIT COLLEGE POPUP ======================================-->
+  <div *ngIf="showEditCollegePopup" class="popup-wrapper">
+    <div (click)="showEditCollegePopup=!showEditCollegePopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit College
+      </mat-toolbar>
+      
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editCollegeForm" (ngSubmit)="editCollegeProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="9" placeholder="College Code" formControlName="code">
+            </mat-form-field>
+          </div>
+        </div>
+          
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="60" placeholder="College Name" formControlName="name">
+            </mat-form-field>
+          </div> 
+        </div>
+
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!--========================== END OF EDIT COLLEGE POPUP ===================================-->
+
+  <!-- ========================= EDIT COURSE POPUP =========================================-->
+  <div *ngIf="showEditCoursePopup" class="popup-wrapper">
+    <div (click)="showEditCoursePopup=!showEditCoursePopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit Course
+      </mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editCourseForm" (ngSubmit)="editCourseProcess()">
+          <div fxLayoutAlign="stretch" fxLayout="row">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput maxlength="9" placeholder="Course Code" formControlName="code">
+              </mat-form-field>
+            </div>
+          </div>
+            <div fxLayoutAlign="stretch" fxLayout="row">
+              <div fxLayout="column">
+                <mat-form-field>
+                  <input matInput maxlength="100" placeholder="Description" formControlName="name">
+                </mat-form-field>
+              </div>
+              
+            </div>
+          
+          <div fxLayout ="column">
+            <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+          </div>
+          <br>
+          <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+        </form>
+      
+    </mat-card>
+  </div>
+
+  <!--=========================== END OF EDIT COURSE POPUP ================================-->
+
+  <!--=========================== EDIT SEMESTER POPUP =====================================-->
+  <div *ngIf="showEditSemesterPopup" class="popup-wrapper">
+    <div (click)="showEditSemesterPopup=!showEditSemesterPopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit Semester
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editSemesterForm" (ngSubmit)="editSemesterProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="9" placeholder="School Year" formControlName="school_year">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <mat-label>Semester</mat-label>
+                <mat-select formControlName="sem">
+                  <mat-option [value]=1>1</mat-option>
+                  <mat-option [value]=2>2</mat-option>
+                  <mat-option [value]=3>Summer</mat-option>
+                </mat-select>
+            </mat-form-field> 
+          </div>
+        </div>
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="30" placeholder="Campus Director" formControlName="campus_director">
+            </mat-form-field>
+          </div>
+          
+        </div>
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!--============================= END OF EDIT SEMESETER POPUP===============================-->
+
+  <!--============================= EDIT SUBJECT POPUP =======================================-->
+  <div *ngIf="showEditSubjectPopup" class="popup-wrapper">
+    <div (click)="showEditSubjectPopup=!showEditSubjectPopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit Subject
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editSubjectForm" (ngSubmit)="editSubjectProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="10" placeholder="Subject Code" formControlName="code">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="80" placeholder="Description" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="1" placeholder="Lec Units" formControlName="lec_units">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="1" placeholder="Lab Units" formControlName="lab_units">
+            </mat-form-field>
+          </div>
+          
+        </div>
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!--============================= END OF EDIT SUBJECT POPUP =================================-->
+
+  <!--============================= EDIT ROOM POPUP ==========================================-->
+  <div *ngIf="showEditRoomPopup" class="popup-wrapper">
+    <div (click)="showEditRoomPopup=!showEditRoomPopup" class="popup-backdrop">
+
+    </div>
+    
+    <mat-card class="popup">
+      <mat-toolbar color="'primary'">
+        Edit Room
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="add-form" [formGroup]="editRoomForm" (ngSubmit)="editRoomProcess()">
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="10" placeholder="Room Code" formControlName="code">
+            </mat-form-field>
+          </div>
+         
+        </div>
+        <div fxLayoutAlign="stretch" fxLayout="row">
+          <div fxLayout="column">
+            <mat-form-field>
+              <input matInput maxlength="80" placeholder="Description" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout ="column">
+          <mat-checkbox formControlName="is_active" class="checkbox">Active</mat-checkbox>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!--============================== END OF EDIT ROOM POPUP =================================-->
