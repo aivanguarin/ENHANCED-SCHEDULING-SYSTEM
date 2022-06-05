@@ -71,3 +71,23 @@ export interface SEMESTER {
     is_active: true,
     campus_director: string, 
 }
+
+export interface setupCOLLEGE{
+    id: number,
+    name: string,
+    dean: string
+}
+export interface setupCOURSE{
+    id: number,
+    code: string,
+    name: string,
+    college: string,
+    chairman: string
+}
+export interface setupSECTION{
+    id: number,
+    section: string,
+    course:string,
+    year: number
+}
+

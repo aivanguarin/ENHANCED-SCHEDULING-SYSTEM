@@ -1,23 +1,61 @@
-<mat-tab-group class="mat-elevation-z1" [backgroundColor]="'primary'">
+<mat-tab-group class="mat-elevation-z1">
+  <mat-tab label="Colleges">
+    <app-tab-template>
+      <div side-title>
+        Colleges
+      </div>
+    <div side-content>
+      <div>
+        <mat-form-field appearance="standard" class="searchbar">
+          <mat-label>Search</mat-label>
+          <input matInput>
+        </mat-form-field>
+        
+      </div>
+      <button mat-button class="gray-button">New College</button>
+    </div>
+      <div main-title>
+        Results
+      </div>
+      <div main-content>
+        <table mat-table [dataSource]="collegeData" class="mat-elevation-z1">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+           <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> NAME </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}}</td> 
+            
+          </ng-container>
+      
+          <ng-container matColumnDef="dean">
+            <th mat-header-cell *matHeaderCellDef> DEAN </th>
+            <td mat-cell *matCellDef="let element"> {{element.dean}} </td>
+          </ng-container>
 
-  <!-- ------------------------------------------------------------------------ -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+            
+              <td mat-cell *matCellDef="let element"  class="actn">
+                <button mat-icon-button color="primary" title="Edit"><mat-icon>edit</mat-icon></button> 
+                <button mat-icon-button color="primary" title="Delete"><mat-icon>delete</mat-icon></button> 
+              </td>
+            
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="collegeRowDef" class="table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: collegeRowDef" class = "table-row"></tr>
+          
+         
+        </table>
+        
+        
+      </div>
+    </app-tab-template>
+  </mat-tab>
 
-    <mat-tab label="Colleges">
-      <app-tab-template>
-        <div side-title>
-          Colleges
-        </div>
-        <div side-content>
-          &lt;to be filled&gt;
-        </div>
-        <div main-title>
-          Results
-        </div>
-        <div main-content>
-          &lt;to be filled&gt;
-        </div>
-      </app-tab-template>
-    </mat-tab>
 
   <!-- ------------------------------------------------------------------------ -->
 
@@ -27,32 +65,130 @@
           Courses
         </div>
         <div side-content>
-          &lt;to be filled&gt;
+          <div>
+            <mat-form-field appearance="standard" class="searchbar">
+              <mat-label>Search</mat-label>
+              <input matInput>
+            </mat-form-field>
+            
+          </div>
+          <button mat-button class="gray-button">New Course</button>
         </div>
         <div main-title>
           Results
         </div>
         <div main-content>
-          &lt;to be filled&gt;
+          <table mat-table [dataSource]="courseData" class="mat-elevation-z1">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+             <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> CODE </th>
+              <td mat-cell *matCellDef="let element"> {{element.code}}</td> 
+              
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> NAME </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="college">
+              <th mat-header-cell *matHeaderCellDef> COLLEGE </th>
+              <td mat-cell *matCellDef="let element"> {{element.college}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="chairman">
+              <th mat-header-cell *matHeaderCellDef> CHAIRMAN </th>
+              <td mat-cell *matCellDef="let element"> {{element.chairman}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+              
+                <td mat-cell *matCellDef="let element"  class="actn">
+                  <button mat-icon-button color="primary" title="Edit"><mat-icon>edit</mat-icon></button> 
+                  <button mat-icon-button color="primary" title="Delete"><mat-icon>delete</mat-icon></button> 
+                </td>
+              
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="courseRowDef" class="table-header"></tr>
+            <tr mat-row *matRowDef="let row; columns: courseRowDef" class = "table-row"></tr>
+            
+           
+          </table>
+          
+          
         </div>
       </app-tab-template>
     </mat-tab>
 
   <!-- ------------------------------------------------------------------------ -->
 
-    <mat-tab label="Sections">
-      <app-tab-template>
-        <div side-title>
-          Sections
-        </div>
-        <div side-content>
-          &lt;to be filled&gt;
-        </div>
+    
+  <!-- ------------------------------------------------------------------------ -->
+
+  <mat-tab label="Sections">
+    <app-tab-template>
+      <div side-title>
+        Sections
+      </div>
+    <div side-content>
+      <div>
+        <mat-form-field appearance="standard" class="searchbar">
+          <mat-label>Search</mat-label>
+          <input matInput>
+        </mat-form-field>
+        
+      </div>
+      <button mat-button class="gray-button">New Section </button>
+    </div>
         <div main-title>
           Results
         </div>
         <div main-content>
-          &lt;to be filled&gt;
+          <table mat-table [dataSource]="sectionData" class="mat-elevation-z1">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+             <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="section">
+              <th mat-header-cell *matHeaderCellDef> SECTION </th>
+              <td mat-cell *matCellDef="let element"> {{element.section}}</td> 
+              
+            </ng-container>
+        
+            <ng-container matColumnDef="course">
+              <th mat-header-cell *matHeaderCellDef> COURSE </th>
+              <td mat-cell *matCellDef="let element"> {{element.course}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="year">
+              <th mat-header-cell *matHeaderCellDef> YEAR </th>
+              <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="actn"> ACTION </th>
+              
+                <td mat-cell *matCellDef="let element"  class="actn">
+                  <button mat-icon-button color="primary" title="Edit"><mat-icon>edit</mat-icon></button> 
+                  <button mat-icon-button color="primary" title="Delete"><mat-icon>delete</mat-icon></button> 
+                </td>
+              
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="sectionRowDef" class="table-header"></tr>
+            <tr mat-row *matRowDef="let row; columns: sectionRowDef" class = "table-row"></tr>
+            
+           
+          </table>
+          
+          
         </div>
       </app-tab-template>
     </mat-tab>
